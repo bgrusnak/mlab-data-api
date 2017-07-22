@@ -1,7 +1,6 @@
 /* jshint asi:true */
-'use strict';
 
-import axios from 'axios'
+var axios = require('axios');
 
 var MLab = function (options) {
   if (!(this instanceof MLab)) {
@@ -18,8 +17,8 @@ var MLab = function (options) {
     timeout: options.timeout || 10000,
     headers: { 'X-Requested-With': 'XMLHttpRequest' }
   }
-  options.onUploadProgress && ap.onUploadProgress = options.onUploadProgress
-  options.onDownloadProgress && ap.onDownloadProgress = options.onDownloadProgress
+  ap.onUploadProgress = options.onUploadProgress
+  ap.onDownloadProgress = options.onDownloadProgress
   this.axios = axios.create(ap)
   this.listDatabases()
     .then(function (response) {
@@ -91,7 +90,7 @@ var MLab = function (options) {
       if ((typeof options.collection !== 'string') || (options.collection === undefined))
         throw new Error('collection is required');
 
-      if ((typeof options.data !== 'array') || (options.data === undefined))
+      if (!Array.isArray(options.data) || (options.data === undefined))
         throw new Error('data is required');
 
       return this.axios.post(this.makePath(['collections', options.collection], { database: options.database }), options.data, {
