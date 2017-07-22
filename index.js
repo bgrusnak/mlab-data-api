@@ -1,3 +1,4 @@
+/* jshint asi:true */
 'use strict';
 
 import axios from 'axios'
