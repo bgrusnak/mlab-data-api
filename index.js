@@ -29,29 +29,27 @@ var MLab = function (options) {
     })
 }
 
-  (
-  function () {
-    this.setDatabase = function (database) {
+    MLab.prototype.setDatabase = function (database) {
       if ((typeof database !== 'string') || (database === undefined)) {
         throw new Error('database name is required');
       }
       this._database = database
     }
 
-    this.makePath = function (uri, params) {
-      realUri = Array.isArray(uri) ? [uri].join('/') : uri;
+    MLab.prototype.makePath = function (uri, params) {
+      realUri = Array.isArray(uri) ? uri.join('/') : uri;
       return [params && params.path ? params.path : this._basePath, 'databases', params && params.database ? params.database : this._database, realUri].join('/')
     };
 
-    this.specialCharChanger = function (str) {
+    MLab.prototype.specialCharChanger = function (str) {
       return str.replace(/ /gi, '%20').replace(/"/gi, '%22');
     };
 
-    this.meters2radians = function (meters) {
+    MLab.prototype.meters2radians = function (meters) {
       return meters / 6378100
     };
 
-    this.doParams = function (params) {
+    MLab.prototype.doParams = function (params) {
       var ap = { apiKey: this._key }
       if (params.query) ap.q = JSON.stringify(params.query)
       if (params.count) ap.c = true
@@ -65,19 +63,19 @@ var MLab = function (options) {
       return ap
     }
 
-    this.listDatabases = function () {
+    MLab.prototype.listDatabases = function () {
       return this.axios.get(this._basePath + '/databases', {
         params: { apiKey: this._key }
       })
     };
 
-    this.listCollections = function (database) {
+    MLab.prototype.listCollections = function (database) {
       return this.axios.get(this.makePath('collections', { database: database }), {
         params: { apiKey: this._key }
       })
     };
 
-    this.listDocuments = function (options) {
+    MLab.prototype.listDocuments = function (options) {
       if ((typeof options.collection !== 'string') || (options.collection === undefined))
         throw new Error('collection is required');
 
@@ -86,7 +84,7 @@ var MLab = function (options) {
       })
     };
 
-    this.insertDocuments = function (options) {
+    MLab.prototype.insertDocuments = function (options) {
       if ((typeof options.collection !== 'string') || (options.collection === undefined))
         throw new Error('collection is required');
 
@@ -98,7 +96,7 @@ var MLab = function (options) {
       })
     };
 
-    this.updateDocuments = function (options) {
+    MLab.prototype.updateDocuments = function (options) {
       if ((typeof options.collection !== 'string') || (options.collection === undefined))
         throw new Error('collection is required');
 
@@ -110,7 +108,7 @@ var MLab = function (options) {
       })
     };
 
-    this.deleteDocuments = function (options) {
+    MLab.prototype.deleteDocuments = function (options) {
       if ((typeof options.collection !== 'string') || (options.collection === undefined))
         throw new Error('collection is required');
 
@@ -119,7 +117,7 @@ var MLab = function (options) {
       })
     };
 
-    this.viewDocument = function (options) {
+    MLab.prototype.viewDocument = function (options) {
       if ((typeof options.collection !== 'string') || (options.collection === undefined))
         throw new Error('collection is required');
 
@@ -130,7 +128,7 @@ var MLab = function (options) {
       })
     };
 
-    this.insertDocument = function (options) {
+    MLab.prototype.insertDocument = function (options) {
       if ((typeof options.collection !== 'string') || (options.collection === undefined))
         throw new Error('collection is required');
 
@@ -141,7 +139,7 @@ var MLab = function (options) {
       })
     };
 
-    this.updateDocument = function (options) {
+    MLab.prototype.updateDocument = function (options) {
       if ((typeof options.collection !== 'string') || (options.collection === undefined))
         throw new Error('collection is required');
 
@@ -154,7 +152,7 @@ var MLab = function (options) {
       })
     };
 
-    this.deleteDocument = function (options) {
+    MLab.prototype.deleteDocument = function (options) {
       if ((typeof options.collection !== 'string') || (options.collection === undefined))
         throw new Error('collection is required');
 
@@ -165,7 +163,7 @@ var MLab = function (options) {
       })
     };
 
-    this.runCommand = function (options) {
+    MLab.prototype.runCommand = function (options) {
       if (options.commands === null) throw new Error('commands is required');
 
       return this.axios.post(this.makePath('runCommand', { database: options.database }), options.commands, {
@@ -174,13 +172,11 @@ var MLab = function (options) {
 
     };
 
-    this.multiple = function (requests) {
+    MLab.prototype.multiple = function (requests) {
       return axios.all(requests.map(function (request) {
         return this[request.func].apply(request.params)
       }))
     }
-
-  }).call(MLab.prototype);
 
 
 
