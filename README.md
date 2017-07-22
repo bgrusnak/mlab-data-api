@@ -38,10 +38,10 @@ var mLab=MLab({
 ```javascript
   mLab.listDatabases()
   .then(function (response) {
-    console.log("got",response.data)
+    console.log('got',response.data)
   })
   .catch(function (error) {
-    console.log("error", error)
+    console.log('error', error)
   })
 ```
 
@@ -50,10 +50,10 @@ var mLab=MLab({
 ```javascript
 mLab.listCollections('exampledb')
   .then(function (response) {
-    console.log("got",response.data)
+    console.log('got',response.data)
   })
   .catch(function (error) {
-    console.log("error", error)
+    console.log('error', error)
   })
 ```
 
@@ -63,15 +63,15 @@ mLab.listCollections('exampledb')
 var options = {
   database: 'exampledb', //optional
   collection: 'examples',
-  query: { "key": "value" }
+  query: { 'key': 'value' }
 };
 
 mLab.listDocuments(options)
   .then(function (response) {
-    console.log("got",response.data)
+    console.log('got',response.data)
   })
   .catch(function (error) {
-    console.log("error", error)
+    console.log('error', error)
   });
 ```
 ### Methods
@@ -173,7 +173,7 @@ Name | Description | Type | Required |
 -----|------------ |------|:----------:|
 database| MongoDB database name | `String` | No |
 collection| MongoDB collection name | `String` | Yes |
-id| the document's id | - | Yes |
+id| the document's id | `String` | Yes |
 
 #### `updateDocument`
 
@@ -187,7 +187,7 @@ Name | Description | Type | Required |
 -----|------------ |------|:----------:|
 database| MongoDB database name | `String` | No |
 collection| MongoDB collection name | `String` | Yes |
-id| the document's id | - | Yes |
+id| the document's id | `String` | Yes |
 updateObject| object sent as replacement | `Object` | Yes |
 
 #### `deleteDocument`
@@ -202,7 +202,7 @@ Name | Description | Type | Required |
 -----|------------ |------|:----------:|
 database| MongoDB database name | `String` | No |
 collection| MongoDB collection name | `String` | Yes |
-id| the document's id | - | Yes |
+id| the document's id | `String` | Yes |
 
 #### `runCommand`
 
