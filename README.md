@@ -109,7 +109,7 @@ Name | Description | Type | Required |
 database| MongoDB database name | `String` | No |
 collection| MongoDB collection name | `String` | Yes |
 query| restrict results by the specified JSON query | `Object` | No |
-resultCount| return the result count for this query | `Boolean` | No |
+count| return the result count for this query | `Boolean` | No |
 fields| specify the set of fields to include or exclude in each document (1 - include; 0 - exclude) | `Object` | No |
 findOne| return a single document from the result set (same as findOne() using the mongo shell) | `Boolean` | No |
 order| specify the order in which to sort each specified field (1- ascending; -1 - descending) | `String` | No |
