@@ -38,10 +38,10 @@ var mLab=MLab({
 ```javascript
   mLab.listDatabases()
   .then(function (response) {
-    console.log('got',response.data)
+    console.log("got",response.data)
   })
   .catch(function (error) {
-    console.log('error', error)
+    console.log("error", error)
   })
 ```
 
@@ -50,10 +50,10 @@ var mLab=MLab({
 ```javascript
 mLab.listCollections('exampledb')
   .then(function (response) {
-    console.log('got',response.data)
+    console.log("got",response.data)
   })
   .catch(function (error) {
-    console.log('error', error)
+    console.log("error", error)
   })
 ```
 
@@ -68,10 +68,10 @@ var options = {
 
 mLab.listDocuments(options)
   .then(function (response) {
-    console.log('got',response.data)
+    console.log("got",response.data)
   })
   .catch(function (error) {
-    console.log('error', error)
+    console.log("error", error)
   });
 ```
 ### Methods
