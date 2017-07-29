@@ -1,6 +1,6 @@
 {
   "name": "mlab-data-api",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "mLab data api for client-side projects",
   "main": "index.js",
   "scripts": {
